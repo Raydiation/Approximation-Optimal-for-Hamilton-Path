@@ -5,28 +5,18 @@ using namespace std;
 class TSP_solution
 {
 public:
-    TSP_solution(vector<vector<int>> graph)
-    {
-        Graph = graph;
-        goodOrder =vector<int>(0);
-        goodOrderScore=0;
-        node_num = Graph.size();
-    }
+    TSP_solution(vector<vector<int>> graph):Graph(graph){}
     vector<int> TSP()
     {
-        Brute_Force Brute_Force_solver(Graph);
+        /*Brute_Force Brute_Force_solver(Graph);
         Brute_Force_solver.Force_solution();
-        return Brute_Force_solver.goodOrder;
-        /*int max_round=1000;
+        return Brute_Force_solver.goodOrder;*/
+        int max_round=1000;
         SA SA_solver(Graph,max_round);
         SA_solver.main_algorithm(max_round);
-        return SA_solver.goodOrder;*/
+        return SA_solver.goodOrder;
     }
-
     vector<vector<int>> Graph;
-    vector<int> goodOrder;
-    int goodOrderScore;
-    int node_num;
 };
 int main()
 {
