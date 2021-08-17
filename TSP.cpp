@@ -11,6 +11,7 @@ public:
     {
         /*Brute_Force Brute_Force_solver(Graph);
         Brute_Force_solver.Force_solution();
+<<<<<<< HEAD
         return Brute_Force_solver.goodOrder;
         int max_round=1000;
         SA SA_solver(Graph,max_round);
@@ -20,11 +21,19 @@ public:
         ACOsolver.init();
         ACOsolver.Round(0);
         return ACOsolver.goodPath;
+=======
+        return Brute_Force_solver.goodOrder;*/
+        int max_round=1000;
+        SA SA_solver(Graph,max_round);
+        SA_solver.main_algorithm(max_round);
+        return SA_solver.goodOrder;
+>>>>>>> 18d7be77aa1962060252c6c90bb3b4b184dd4353
     }
     vector<vector<int>> Graph;
 };
 int main()
 {
+    //my test case
     default_random_engine generator = default_random_engine(time(NULL));
     uniform_int_distribution<int> distribution_int(0,100);
     auto rand_int=bind(distribution_int,generator);
@@ -49,6 +58,7 @@ int main()
         }
         cout<<endl;
     }
+    //my test case
     TSP_solution solve(graph);
     solve.TSP();
 }
