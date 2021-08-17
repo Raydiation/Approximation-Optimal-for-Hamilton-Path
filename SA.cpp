@@ -33,8 +33,7 @@ double SA::Score(vector<int> order)
 }
 void SA::main_algorithm(int Max_Round)
 {
-    random_device rand_seed;
-    default_random_engine generator = default_random_engine(rand_seed());
+    default_random_engine generator = default_random_engine(time(NULL));
     uniform_int_distribution<int> distribution_int(0,node_num-1);
     uniform_real_distribution<double> distribution_real(0,1);
     auto rand_int=bind(distribution_int,generator);
