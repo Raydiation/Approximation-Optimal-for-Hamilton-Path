@@ -1,5 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
+
+
+
 class ACO
 {
 public:
@@ -34,6 +37,12 @@ void ACO::init()
     alpha = 1;
     beta = 2;
     Q = 1000;
+
+    default_random_engine generator = default_random_engine(time(NULL));
+    uniform_int_distribution<int> distribution_int(0,node_num-1);
+    uniform_real_distribution<double> distribution_real(0,1);
+    auto rand_int=bind(distribution_int,generator);
+    auto rand_real=bind(distribution_real,generator);
 }
 double ACO::greedy()
 {
@@ -77,12 +86,14 @@ void ACO::Compute_Transintion_Probability()
 void ACO::Round(int round)
 {
     default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, node_num - 1);
-    uniform_real_distribution<double> distribution_real(0, 1);
-    auto rand_int = bind(distribution_int, generator);
-    auto rand_real = bind(distribution_real, generator);
+    uniform_int_distribution<int> distribution_int(0,node_num-1);
+    uniform_real_distribution<double> distribution_real(0,1);
+    auto rand_int=bind(distribution_int,generator);
+    auto rand_real=bind(distribution_real,generator);
+
     Compute_Transintion_Probability();
     vector<vector<int>> path(node_num);
+
     for (int ant = 0; ant < num_of_ants; ant++)
     {
         vector<pair<int, double>>visit(node_num);
@@ -96,7 +107,7 @@ void ACO::Round(int round)
         for (int vis_num = 1; vis_num < node_num; vis_num++)//construct TSP route
         {
             double dice = rand_real();
-            int next_node;
+            int next_node = 0;
 
             visit[0].second = transition_probability[current_position][visit[0].first];
             for (int i = 1; i < visit.size(); i++)
@@ -111,21 +122,13 @@ void ACO::Round(int round)
             {
                 if (dice > visit[i].second)
                 {
-                    next_node = visit[i + 1].first;
-                    visit.erase(visit.begin() + (i + 1));
-                    path[ant].push_back(next_node);
-                    current_position = next_node;
-                    break;
-                }
-                if (!i)
-                {
-                    next_node = visit[0].first;
-                    visit.erase(visit.begin() + 0);
-                    path[ant].push_back(next_node);
-                    current_position = next_node;
+                    next_node = i + 1;
                     break;
                 }
             }
+            path[ant].push_back(visit[next_node].first);
+            current_position = visit[next_node].first;
+            visit.erase(visit.begin() + next_node);
         }
     }
     update_pheromone(round, path);

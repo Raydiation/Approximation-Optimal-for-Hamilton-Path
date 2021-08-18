@@ -1,8 +1,11 @@
 #include<bits/stdc++.h>
+#include"GA.cpp"
 #include"SA.cpp"
 #include"Brute_Force.cpp"
 #include"ACO.cpp"
 using namespace std;
+
+
 class TSP_solution
 {
 public:
@@ -15,21 +18,26 @@ public:
         int max_round=1000;
         SA SA_solver(Graph,max_round);
         SA_solver.main_algorithm(max_round);
-        return SA_solver.goodOrder;*/
+        return SA_solver.goodOrder;
         ACO ACOsolver(Graph, 50);
         ACOsolver.init();
         ACOsolver.Round(0);
-        return ACOsolver.goodPath;
+        return ACOsolver.goodPath;*/
+        GA GA_solver(Graph,5);
+        GA_solver.Init();
+        GA_solver.update_candidate(0);
+        return GA_solver.candidate_route[0].first;
     }
     vector<vector<int>> Graph;
 };
 int main()
 {
-    default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, 100);
-    auto rand_int = bind(distribution_int, generator);
+    const int node_num = 12;
 
-    const int node_num = 18;
+    default_random_engine generator = default_random_engine(time(NULL));
+    uniform_int_distribution<int> distribution_int(0,node_num-1);
+    auto rand_int=bind(distribution_int,generator);
+
     vector<vector<int>> graph(node_num, vector<int>(node_num));
     for (int i = 0; i < node_num; i++)
     {
