@@ -5,7 +5,6 @@
 #include"ACO.cpp"
 using namespace std;
 
-
 class TSP_solution
 {
 public:
@@ -23,7 +22,7 @@ public:
         ACOsolver.init();
         ACOsolver.Round(0);
         return ACOsolver.goodPath;*/
-        GA GA_solver(Graph,5);
+        GA GA_solver(Graph, 5);
         GA_solver.Init();
         GA_solver.update_candidate(0);
         return GA_solver.candidate_route[0].first;
@@ -35,8 +34,8 @@ int main()
     const int node_num = 12;
 
     default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0,node_num-1);
-    auto rand_int=bind(distribution_int,generator);
+    uniform_int_distribution<int> distribution_int(0, node_num - 1);
+    auto rand_int = bind(distribution_int, generator);
 
     vector<vector<int>> graph(node_num, vector<int>(node_num));
     for (int i = 0; i < node_num; i++)
