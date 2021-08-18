@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
-
 class ACO
 {
 public:
@@ -39,10 +37,10 @@ void ACO::init()
     Q = 1000;
 
     default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0,node_num-1);
-    uniform_real_distribution<double> distribution_real(0,1);
-    auto rand_int=bind(distribution_int,generator);
-    auto rand_real=bind(distribution_real,generator);
+    uniform_int_distribution<int> distribution_int(0, node_num - 1);
+    uniform_real_distribution<double> distribution_real(0, 1);
+    auto rand_int = bind(distribution_int, generator);
+    auto rand_real = bind(distribution_real, generator);
 }
 double ACO::greedy()
 {
@@ -86,10 +84,10 @@ void ACO::Compute_Transintion_Probability()
 void ACO::Round(int round)
 {
     default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0,node_num-1);
-    uniform_real_distribution<double> distribution_real(0,1);
-    auto rand_int=bind(distribution_int,generator);
-    auto rand_real=bind(distribution_real,generator);
+    uniform_int_distribution<int> distribution_int(0, node_num - 1);
+    uniform_real_distribution<double> distribution_real(0, 1);
+    auto rand_int = bind(distribution_int, generator);
+    auto rand_real = bind(distribution_real, generator);
 
     Compute_Transintion_Probability();
     vector<vector<int>> path(node_num);
