@@ -35,12 +35,6 @@ void ACO::init()
     alpha = 1;
     beta = 2;
     Q = 1000;
-
-    default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, node_num - 1);
-    uniform_real_distribution<double> distribution_real(0, 1);
-    auto rand_int = bind(distribution_int, generator);
-    auto rand_real = bind(distribution_real, generator);
 }
 double ACO::greedy()
 {
