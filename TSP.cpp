@@ -5,6 +5,7 @@
 #include"ACO.cpp"
 using namespace std;
 
+
 class TSP_solution
 {
 public:
@@ -13,29 +14,43 @@ public:
     {
         /*Brute_Force Brute_Force_solver(Graph);
         Brute_Force_solver.Force_solution();
-        return Brute_Force_solver.goodOrder;
-        int max_round=1000;
+        return Brute_Force_solver.goodOrder;*/
+        int max_round=5000;
         SA SA_solver(Graph,max_round);
         SA_solver.main_algorithm(max_round);
-        return SA_solver.goodOrder;
-        ACO ACOsolver(Graph, 50);
-        ACOsolver.init();
-        ACOsolver.Round(0);
-        return ACOsolver.goodPath;*/
-        GA GA_solver(Graph, 5);
+
+        //return SA_solver.goodOrder;
+        ACO ACO_solver(Graph, 20);
+        ACO_solver.init();
+        ACO_solver.Round(0);
+
+        //return ACOsolver.goodPath;
+        GA GA_solver(Graph,20);
         GA_solver.Init();
         GA_solver.update_candidate(0);
+        cout<<"SA result : "<<SA_solver.goodOrderScore<<"\n";
+        for(int num:SA_solver.goodOrder)
+            cout<<num<<" ";
+        cout<<endl;
+        cout<<"ACO result : "<<ACO_solver.goodPathLength<<"\n";
+        for(int num:ACO_solver.goodPath)
+            cout<<num<<" ";
+        cout<<endl;
+        cout<<"GA result : "<<GA_solver.route_length(GA_solver.candidate_route[0].first)<<"\n";
+        for(int num:GA_solver.candidate_route[0].first)
+            cout<<num<<" ";
+        cout<<endl;
         return GA_solver.candidate_route[0].first;
     }
     vector<vector<int>> Graph;
 };
 int main()
 {
-    const int node_num = 12;
+    const int node_num = 10;
 
     default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, node_num - 1);
-    auto rand_int = bind(distribution_int, generator);
+    uniform_int_distribution<int> distribution_int(0,2*node_num-1);
+    auto rand_int=bind(distribution_int,generator);
 
     vector<vector<int>> graph(node_num, vector<int>(node_num));
     for (int i = 0; i < node_num; i++)
