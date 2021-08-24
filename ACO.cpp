@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+
 class ACO
 {
 public:
@@ -11,6 +13,7 @@ public:
     void Compute_Transintion_Probability();
     void update_pheromone(int, vector<vector<int>>);
 
+    default_random_engine generator;
     vector<int>goodPath;
     vector<vector<int>>Graph;
     vector<vector<double>>pheromone;
@@ -35,6 +38,7 @@ void ACO::init()
     alpha = 1;
     beta = 2;
     Q = 1000;
+    generator = default_random_engine(time(NULL));
 }
 double ACO::greedy()
 {
@@ -77,11 +81,10 @@ void ACO::Compute_Transintion_Probability()
 
 void ACO::Round(int round)
 {
-    default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, node_num - 1);
-    uniform_real_distribution<double> distribution_real(0, 1);
-    auto rand_int = bind(distribution_int, generator);
-    auto rand_real = bind(distribution_real, generator);
+    uniform_int_distribution<int> distribution_int(0,node_num-1);
+    uniform_real_distribution<double> distribution_real(0,1);
+    auto rand_int=bind(distribution_int,generator);
+    auto rand_real=bind(distribution_real,generator);
 
     Compute_Transintion_Probability();
     vector<vector<int>> path(node_num);

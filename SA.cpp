@@ -4,7 +4,7 @@ using namespace std;
 class SA
 {
 public:
-    SA(vector<vector<int>>graph, int max_round) :Graph(graph), Max_round(max_round), node_num(graph.size()) {}
+    SA(vector<vector<int>>graph, int max_round) :Graph(graph), Max_round(max_round), node_num(graph.size()),generator(default_random_engine(time(NULL))){}
     double Score(vector<int>);
     vector<int> Rand_start();
     void main_algorithm(int);
@@ -12,7 +12,7 @@ public:
     vector<vector<int>> Graph;
     int Max_round;
     int node_num;
-
+    default_random_engine generator;
     vector<int> goodOrder;
     int goodOrderScore;
 };
@@ -33,11 +33,10 @@ double SA::Score(vector<int> order)
 }
 void SA::main_algorithm(int Max_Round)
 {
-    default_random_engine generator = default_random_engine(time(NULL));
-    uniform_int_distribution<int> distribution_int(0, node_num - 1);
-    uniform_real_distribution<double> distribution_real(0, 1);
-    auto rand_int = bind(distribution_int, generator);
-    auto rand_real = bind(distribution_real, generator);
+    uniform_int_distribution<int> distribution_int(0,node_num-1);
+    uniform_real_distribution<double> distribution_real(0,1);
+    auto rand_int=bind(distribution_int,generator);
+    auto rand_real=bind(distribution_real,generator);
 
     vector<int> current_order = Rand_start();
     vector<int> next_order = current_order;
@@ -78,3 +77,5 @@ void SA::main_algorithm(int Max_Round)
     }
     return;
 }
+
+
