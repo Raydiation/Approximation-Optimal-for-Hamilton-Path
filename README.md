@@ -29,7 +29,10 @@ The core of my GA algorithm is 3 steps:
 -------------
 Current problem : 
 Suppose that when we pass a node, we will recieve a object with size s_n (depend on node) into my backpack.  
-And each backpack has same capacity.  
+And each backpack has same capacity. Notice that we the order of objects in backpack is same as the order we pick it up.   
 And my goal is that (pick one or both two) :
 * Use less backpack as possible.  
-* In each backpack, the connetivity of nodes(depend on the edge we choose) where the objects belong to as high as possible.
+* In each backpack, the connetivity of nodes(depend on the edge we choose) where the objects belong to as high as possible.  
+
+Current thought :   
+* Use GA to find some great routes and then analyze them to find a better route.  
