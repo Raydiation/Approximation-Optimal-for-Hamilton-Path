@@ -36,3 +36,4 @@ And my goal is that (pick one or both two) :
 
 Current thought :   
 * Use GA to find some great routes and then analyze them to find a better route.  
+* Multiobjective Optimization Algorithms(What's that?)  
